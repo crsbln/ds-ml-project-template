@@ -1,0 +1,164 @@
+# Kickstarter Launch Check · Presenter cheat sheet
+
+Read the **Say** part aloud. **If asked** holds the details we took off the slides.
+
+## 1 · Will your Kickstarter project get funded?
+
+**Say:** Welcome. Every creator asks one question before launch: will my project get funded? We looked at 372,293 past Kickstarter campaigns to answer it with data, and built a simple check that gives a creator an honest chance before launch day.
+
+**If asked:**
+
+- Data: Kickstarter Projects dataset (Kaggle), finished campaigns from 2009 to early 2018.
+- Independent analysis of public data, not affiliated with Kickstarter.
+- The ring on the cover: 36% of all campaigns got funded.
+
+## 2 · Our team
+
+**Say:** We are a team of three, all AIPM. In this project each of us had a focus. Kashif Kazmi, our project manager, planned the milestones, ran our Kanban board and kept us on track. Furkan Yurttepe, our data scientist, cleaned and explored the data and built the model. Christian Balan, our design thinker, framed the creator's problem and turned the findings into this story.
+
+**If asked:**
+
+- AIPM = AI Project Management (neuefische).
+- The roles are each person's focus in this project; all three of us are AIPM.
+
+## 3 · How likely is a campaign to get funded?
+
+**Say:** Our approach in three steps. One: we learn from the past, 372,293 finished campaigns. Two: the creator enters the plan, only what is known before launch: goal, category, country, length, launch day and the title. Three: they get back an honest chance of funding. For this board game: 51 percent, above average.
+
+**If asked:**
+
+- Canceled campaigns count as not funded: the creator got no money.
+- Without canceled campaigns (only failed and successful): 331,675 campaigns, 40% funded. Same patterns, every rate about 4 points higher (Dance 66%, Technology 24%).
+- The title “Heroes of the Frozen Northern Isles” is an example: the model only uses how long a title is (here 6 words), not what it says.
+- The example launches on a Tuesday in March.
+
+## 4 · ~1/3 of all projects get funded
+
+**Say:** Kickstarter is all or nothing. Miss your goal by one dollar and you get nothing. And only about a third of all projects get funded: of every 100, 36 got funded, 64 got nothing back for weeks of work.
+
+**If asked:**
+
+- 133,956 funded, 238,337 not funded.
+- Raw data: 378,661 rows. Dropped: live and undefined campaigns (no outcome yet) and 7 with a broken launch date.
+
+## 5 · Smaller goals get funded far more often
+
+**Say:** Our first finding: the goal. Campaigns asking for up to 1,000 dollars were funded 49 percent of the time, about one in two. Over 100,000 dollars: only 6 percent. Every time the goal doubles, the odds drop a step. Ask for what you truly need, and use stretch goals for the extras.
+
+**If asked:**
+
+- All bands: up to $1k 49%, $1k–$2.5k 46%, $2.5k–$5k 40%, $5k–$10k 35%, $10k–$25k 30%, $25k–$50k 21%, $50k–$100k 14%, over $100k 6%.
+- Median goal across all campaigns: $5,500.
+- A pattern in past campaigns, not a guarantee.
+
+## 6 · Arts beat tech: Dance 62%, Technology 20%
+
+**Say:** Second: what you make matters. Dance campaigns were funded 62 percent of the time, Technology only 20. Why does tech struggle? Goals too high: a typical successful tech project asked for 10,000 dollars, a failed one 20,000. Arts projects often have a loyal community behind them.
+
+**If asked:**
+
+- Average across all categories: 36%.
+- Top: Dance 62%, Theater 60%, Comics 54%, Music 49%. Bottom: Crafts 24%, Journalism 21%, Technology 20%.
+- The gap stays at the same goal size: with a $1k–$5k goal, Dance 69% vs Technology 26%.
+- Exact tech medians: $10,000 funded vs $20,200 not funded.
+
+## 7 · The 30-day default and 60 days do worst
+
+**Say:** Third: the length. Most creators keep the 30-day default, 166,483 campaigns, almost half of all. Only 32 percent of them got funded, against 46 at 29 days and 50 at 31 days. The same at 60 days, the maximum: 19 percent, against 24 at 59 and 38 at 61. One day can't change who backs you. It's a sign of planning. Pick your end date on purpose.
+
+**If asked:**
+
+- 30-day campaigns: 45% of all campaigns.
+- Every round number we checked (15, 20, 45, 60 days) did worse than the day before and the day after.
+- 61-day and longer campaigns are mostly older ones, from before Kickstarter's 60-day limit.
+- A pattern, not proof of cause.
+
+## 8 · The trap: data from the future
+
+**Say:** A key step: avoiding the trap. The data also holds the money pledged and the number of backers. But you only know those when the campaign is over. A model that uses them is right 99.7 percent of the time, because “pledged at least the goal” is simply what funded means. That's like calling a match after the final whistle. So we only use what is known on launch day.
+
+**If asked:**
+
+- 99.7%: on our 372,293 campaigns the rule “pledged ≥ goal” matches the outcome. Without canceled campaigns it is 99.997%.
+- The few mismatches are mostly canceled campaigns that had reached their goal (698).
+- Removed columns: money pledged, number of backers, and the status tags hidden in some titles (e.g. “(Canceled)”).
+
+## 9 · How we built it
+
+**Say:** How we built it, in five steps. One: we cleaned the data. Two: we removed the future data: the money pledged and the number of backers are only known when the campaign ends, not on launch day. Three: we trained the model on 80 percent of the campaigns. Four: we kept the other 20 percent aside for the final test. Five: we compared models against a simple rule of thumb and picked the best model.
+
+**If asked:**
+
+- “Future data” is our plain word for target leakage: columns that already contain the answer (money pledged, number of backers). See slide 8.
+- Step 3 and 4: trained on 297,834 campaigns; 74,459 locked away for the final test.
+- Step 5: each model was tested fairly by rotating the data it learns from (5-fold cross-validation: train on four parts, check on the fifth, five times).
+- The simple rule of thumb: “goal under $5,500 = success”.
+
+## 10 · Gradient boosting performed best
+
+**Say:** Which model won? We compared three against the simple rule of thumb, smaller goal means more likely. The score is easy: show it two campaigns, one funded, one not; how often does it pick the funded one? A coin flip gets 0.5, the rule 0.64. Gradient boosting gets 0.75, the best.
+
+**If asked:**
+
+- Scores (picks the funded one of a pair, ROC-AUC): gradient boosting 0.75, logistic regression 0.73, random forest 0.72, goal rule 0.64. F1 (hits vs false alarms): 0.62 vs 0.52 for the rule.
+- The simple rule as a yes/no: “goal under $5,500 = success”.
+- Gradient boosting was then tuned (learning rate 0.05, 400 trees, 31 leaves) and tested once on the 20%: ROC-AUC 0.754.
+
+## 11 · When we predict 35%, 35% get funded
+
+**Say:** How do we predict, and can you trust it? A creator gives us the campaign plan. Our model, which learned from 372,293 past campaigns, turns that plan into a chance of funding. Then we checked: on 74,459 campaigns it had never seen, when we predicted 35 percent, 35 percent really got funded. And it's like that at every level. So the number is honest.
+
+**If asked:**
+
+- How we checked: we locked away 74,459 campaigns, let the Launch Check give each one a chance, then compared with what really happened.
+- Every level (said → really funded): 5→5%, 15→15%, 25→26%, 35→35%, 45→45%, 55→55%, 65→65%, 74→73%, 83→84%, 91→94%.
+- In simple bands: low chance (under 25%) → 14 of 100 funded, medium (25–50%) → 37, high (50%+) → 62.
+- Metrics: slide 9 = picks the funded one of a pair (ROC-AUC 0.75 vs 0.64) and hits vs false alarms (F1 0.62 vs 0.52); slide 10 = do the predicted chances match reality (calibration).
+- Better than a rule of thumb: of 100 campaigns it calls promising, 53 got funded; “small goal = success” gets 45.
+
+## 12 · Category and goal drive the prediction
+
+**Say:** What does the model look at? Category and funding goal drive the prediction. Campaign length follows. The title, the country and the launch date matter only a little.
+
+**If asked:**
+
+- How it is measured: scramble one input at a time and see how much worse the model gets. The most important one is set to 100.
+- Scores: category 100, funding goal 84, campaign length 32, words in title 7, country 7, launch weekday 2, title length 2, launch month 1.
+
+## 13 · A board game, checked before launch
+
+**Say:** Here's how it looks for a creator. A board game from the US, 10,000 dollar goal, 30 days. The Launch Check says 51 percent, above the 36 percent average. A fair chance, not a sure thing.
+
+**If asked:**
+
+- Launch on a Tuesday in March, 6-word title.
+- 1,375 similar past campaigns, 43% of them funded.
+- Live demo: uv run kickstarter-check.
+- Why no “what if” buttons: small changes like one day more swing the number (29 days would show 72%) without changing the real odds, so we show starting odds only.
+
+## 14 · Limitations & Constraints
+
+**Say:** Limitations and constraints. Every tool has limits. The check only knows the plan, the tip of the iceberg. It can't see your video, your rewards, your fans or your marketing, and those often make the difference. And the data ends in early 2018, so today's market may look different. A starting point, not a verdict.
+
+**If asked:**
+
+- Its biggest misses: tiny board-game campaigns that failed and huge tech or food campaigns that succeeded. The reasons (product, audience, marketing) are not in the data.
+
+## 15 · Insights & Recommendations
+
+**Say:** Our insights and recommendations: three steps before you launch. One: set a realistic goal: up to 1,000 dollars, 49 percent get funded, over 100,000 only 6. Two: pick your end date on purpose: not the 30-day default, 32 percent, and not 60 days, 19. Three: know your category: Dance 62, Technology 20; in tough categories, build an audience first.
+
+**If asked:**
+
+- Patterns from past campaigns, not guarantees.
+
+## 16 · Thank you
+
+**Say:** Thank you for your attention. We're happy to take your questions.
+
+**If asked:**
+
+- “Why not more accurate?” The plan alone can't see quality, fans or marketing.
+- “Can creators game it?” We show starting odds, not tweak suggestions.
+- Code and notebook: github.com/crsbln/ds-ml-project-template. Live deck: crsbln.github.io/ds-ml-slides.
+- “Is the data current?” It ends in early 2018. Trained on older campaigns and tested on newer ones, the model still held up (score 0.76).

@@ -139,3 +139,16 @@ dmypy.json
 # nbdime Stuff
 .gitattributes
 
+# Data files (not committed, see dataset license)
+data/*
+!data/.gitkeep
+
+# Slides: generated print page (rebuild with slides/build_pdf.py)
+slides/slides_print.html
+
+# ---- project ----
+# The deck generator lives in presentations/build (the generic build/ rule above ignores it)
+!presentations/build/
+presentations/build/node_modules/
+# LibreOffice lock files
+.~lock.*

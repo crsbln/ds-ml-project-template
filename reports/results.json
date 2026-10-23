@@ -1,0 +1,228 @@
+{
+  "meta": {
+    "source": "notebook",
+    "generated": "2026-10-21",
+    "scikit_learn": "1.9.0",
+    "note": "Values copied from the outputs of notebooks/01_kickstarter_eda_and_modeling.ipynb. Running `uv run kickstarter-train` overwrites this file with freshly computed numbers in the same format."
+  },
+  "data": {
+    "raw_rows": 378661,
+    "after_unknown_outcome_dropped": 372300,
+    "canceled_reached_goal": 698,
+    "invalid_launch_dropped": 7,
+    "clean_rows": 372293,
+    "country_fixed": 234,
+    "status_tags_removed": 24135,
+    "funded": 133956,
+    "not_funded": 238337,
+    "success_rate": 0.36,
+    "first_year": 2009,
+    "last_year": 2018,
+    "n_categories": 159,
+    "n_main_categories": 15
+  },
+  "eda": {
+    "by_main_category": [
+      {"name": "Dance", "rate": 0.624, "projects": 3749, "median_goal": 3300},
+      {"name": "Theater", "rate": 0.601, "projects": 10871, "median_goal": 3292},
+      {"name": "Comics", "rate": 0.544, "projects": 10743, "median_goal": 3500},
+      {"name": "Music", "rate": 0.49, "projects": 49403, "median_goal": 4000},
+      {"name": "Art", "rate": 0.412, "projects": 27959, "median_goal": 3000},
+      {"name": "Film & Video", "rate": 0.379, "projects": 62399, "median_goal": 7000},
+      {"name": "Games", "rate": 0.358, "projects": 34943, "median_goal": 8000},
+      {"name": "Design", "rate": 0.354, "projects": 29763, "median_goal": 10000},
+      {"name": "Publishing", "rate": 0.314, "projects": 39113, "median_goal": 5000},
+      {"name": "Photography", "rate": 0.308, "projects": 10730, "median_goal": 4000},
+      {"name": "Food", "rate": 0.249, "projects": 24418, "median_goal": 10000},
+      {"name": "Fashion", "rate": 0.248, "projects": 22563, "median_goal": 5939},
+      {"name": "Crafts", "rate": 0.242, "projects": 8733, "median_goal": 2328},
+      {"name": "Journalism", "rate": 0.214, "projects": 4724, "median_goal": 5000},
+      {"name": "Technology", "rate": 0.2, "projects": 32189, "median_goal": 20000}
+    ],
+    "by_goal": [
+      {"name": "up to 1k", "rate": 0.494, "projects": 60449},
+      {"name": "1k-2.5k", "rate": 0.46, "projects": 52221},
+      {"name": "2.5k-5k", "rate": 0.404, "projects": 70173},
+      {"name": "5k-10k", "rate": 0.354, "projects": 66046},
+      {"name": "10k-25k", "rate": 0.296, "projects": 62683},
+      {"name": "25k-50k", "rate": 0.211, "projects": 31931},
+      {"name": "50k-100k", "rate": 0.14, "projects": 16217},
+      {"name": "over 100k", "rate": 0.058, "projects": 12580}
+    ],
+    "by_duration": [
+      {"name": "1-14", "rate": 0.483, "projects": 13417},
+      {"name": "15-29", "rate": 0.487, "projects": 55177},
+      {"name": "30", "rate": 0.319, "projects": 166483},
+      {"name": "31-44", "rate": 0.443, "projects": 65909},
+      {"name": "45-59", "rate": 0.308, "projects": 33128},
+      {"name": "60", "rate": 0.19, "projects": 32714},
+      {"name": "61-92", "rate": 0.342, "projects": 5465}
+    ],
+    "duration_by_goal": {
+      "columns": ["1-14", "15-29", "30", "31-44", "45-59", "60", "61-92"],
+      "rows": [
+        {"name": "up to 1k", "rates": [0.593, 0.59, 0.428, 0.569, 0.463, 0.35, 0.485]},
+        {"name": "1k-5k", "rates": [0.457, 0.538, 0.38, 0.537, 0.389, 0.261, 0.404]},
+        {"name": "5k-25k", "rates": [0.28, 0.417, 0.293, 0.431, 0.294, 0.178, 0.279]},
+        {"name": "over 25k", "rates": [0.073, 0.215, 0.139, 0.261, 0.151, 0.057, 0.077]}
+      ]
+    },
+    "round_lengths": [
+      {"days": 15, "before": 0.506, "round": 0.418, "after": 0.573, "projects": 5300},
+      {"days": 20, "before": 0.552, "round": 0.406, "after": 0.541, "projects": 6721},
+      {"days": 25, "before": 0.535, "round": 0.442, "after": 0.521, "projects": 6066},
+      {"days": 30, "before": 0.459, "round": 0.319, "after": 0.495, "projects": 166483},
+      {"days": 35, "before": 0.491, "round": 0.39, "after": 0.48, "projects": 9936},
+      {"days": 40, "before": 0.434, "round": 0.335, "after": 0.449, "projects": 9828},
+      {"days": 45, "before": 0.415, "round": 0.287, "after": 0.437, "projects": 17446},
+      {"days": 60, "before": 0.242, "round": 0.19, "after": 0.375, "projects": 32714}
+    ],
+    "by_year": [
+      {"year": 2009, "rate": 0.436, "projects": 1329},
+      {"year": 2010, "rate": 0.437, "projects": 10519},
+      {"year": 2011, "rate": 0.464, "projects": 26237},
+      {"year": 2012, "rate": 0.435, "projects": 41163},
+      {"year": 2013, "rate": 0.433, "projects": 44849},
+      {"year": 2014, "rate": 0.315, "projects": 66994},
+      {"year": 2015, "rate": 0.28, "projects": 74920},
+      {"year": 2016, "rate": 0.331, "projects": 56755},
+      {"year": 2017, "rate": 0.373, "projects": 49525}
+    ],
+    "by_month": [
+      {"month": 1, "rate": 0.346}, {"month": 2, "rate": 0.375}, {"month": 3, "rate": 0.383},
+      {"month": 4, "rate": 0.378}, {"month": 5, "rate": 0.369}, {"month": 6, "rate": 0.363},
+      {"month": 7, "rate": 0.324}, {"month": 8, "rate": 0.338}, {"month": 9, "rate": 0.365},
+      {"month": 10, "rate": 0.372}, {"month": 11, "rate": 0.368}, {"month": 12, "rate": 0.328}
+    ],
+    "by_country": [
+      {"name": "US", "rate": 0.376, "projects": 291048},
+      {"name": "GB", "rate": 0.362, "projects": 33417},
+      {"name": "CA", "rate": 0.283, "projects": 14629},
+      {"name": "AU", "rate": 0.259, "projects": 7777},
+      {"name": "DE", "rate": 0.229, "projects": 4096},
+      {"name": "FR", "rate": 0.315, "projects": 2887},
+      {"name": "NL", "rate": 0.218, "projects": 2833},
+      {"name": "IT", "rate": 0.157, "projects": 2802},
+      {"name": "ES", "rate": 0.221, "projects": 2224},
+      {"name": "SE", "rate": 0.293, "projects": 1738}
+    ]
+  },
+  "baseline": {
+    "median_goal_usd": 5500,
+    "cv": {"accuracy": 0.588, "precision": 0.448, "recall": 0.619, "f1": 0.52, "f1_std": 0.002},
+    "test": {"accuracy": 0.591, "precision": 0.451, "recall": 0.625, "f1": 0.524, "share_labelled": 0.499}
+  },
+  "model_comparison": [
+    {"name": "Logistic Regression", "roc_auc": 0.7279, "roc_auc_std": 0.0014, "log_loss": 0.5752, "log_loss_std": 0.001, "brier": 0.1971, "brier_std": 0.0004},
+    {"name": "Random Forest", "roc_auc": 0.7183, "roc_auc_std": 0.001, "log_loss": 0.5813, "log_loss_std": 0.0007, "brier": 0.1998, "brier_std": 0.0003},
+    {"name": "Gradient Boosting", "roc_auc": 0.7517, "roc_auc_std": 0.0014, "log_loss": 0.5558, "log_loss_std": 0.001, "brier": 0.1895, "brier_std": 0.0005}
+  ],
+  "tuning": {
+    "params": {"learning_rate": 0.05, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 100, "l2_regularization": 1.0},
+    "searched": true,
+    "best_log_loss": 0.5555
+  },
+  "final": {
+    "threshold": 0.299,
+    "cv_f1": 0.618,
+    "train_rows": 297834,
+    "test_rows": 74459,
+    "test": {"accuracy": 0.641, "precision": 0.501, "recall": 0.811, "f1": 0.619, "share_labelled": 0.583, "roc_auc": 0.754, "brier": 0.189, "npv": 0.837}
+  },
+  "equal_share": {"threshold": 0.349, "accuracy": 0.671, "precision": 0.53, "recall": 0.736, "f1": 0.616, "share_labelled": 0.499},
+  "calibration": {
+    "mean_predicted": 0.36,
+    "actual_rate": 0.36,
+    "bins": [
+      {"predicted": 0.055, "actual": 0.053, "projects": 8449},
+      {"predicted": 0.151, "actual": 0.15, "projects": 10860},
+      {"predicted": 0.251, "actual": 0.255, "projects": 11896},
+      {"predicted": 0.35, "actual": 0.35, "projects": 12258},
+      {"predicted": 0.449, "actual": 0.445, "projects": 10964},
+      {"predicted": 0.549, "actual": 0.547, "projects": 9170},
+      {"predicted": 0.646, "actual": 0.646, "projects": 6556},
+      {"predicted": 0.741, "actual": 0.734, "projects": 3381},
+      {"predicted": 0.829, "actual": 0.836, "projects": 907},
+      {"predicted": 0.913, "actual": 0.944, "projects": 18}
+    ]
+  },
+  "bands": [
+    {"name": "below average", "projects": 25151, "share": 0.338, "actual": 0.136},
+    {"name": "about average", "projects": 29276, "share": 0.393, "actual": 0.371},
+    {"name": "above average", "projects": 20032, "share": 0.269, "actual": 0.624}
+  ],
+  "calibration_by_year": [
+    {"year": 2009, "projects": 273, "predicted": 0.414, "actual": 0.407},
+    {"year": 2010, "projects": 2159, "predicted": 0.441, "actual": 0.421},
+    {"year": 2011, "projects": 5337, "predicted": 0.44, "actual": 0.464},
+    {"year": 2012, "projects": 8082, "predicted": 0.412, "actual": 0.43},
+    {"year": 2013, "projects": 8995, "predicted": 0.399, "actual": 0.436},
+    {"year": 2014, "projects": 13401, "predicted": 0.334, "actual": 0.313},
+    {"year": 2015, "projects": 14986, "predicted": 0.317, "actual": 0.279},
+    {"year": 2016, "projects": 11333, "predicted": 0.331, "actual": 0.332},
+    {"year": 2017, "projects": 9893, "predicted": 0.357, "actual": 0.379}
+  ],
+  "by_category_test": [
+    {"name": "Theater", "projects": 2199, "actual": 0.599, "predicted": 0.599, "labelled": 0.911, "roc_auc": 0.685},
+    {"name": "Design", "projects": 5923, "actual": 0.351, "predicted": 0.351, "labelled": 0.631, "roc_auc": 0.688},
+    {"name": "Comics", "projects": 2228, "actual": 0.537, "predicted": 0.533, "labelled": 0.873, "roc_auc": 0.695},
+    {"name": "Journalism", "projects": 951, "actual": 0.222, "predicted": 0.207, "labelled": 0.234, "roc_auc": 0.695},
+    {"name": "Art", "projects": 5480, "actual": 0.406, "predicted": 0.413, "labelled": 0.735, "roc_auc": 0.697},
+    {"name": "Photography", "projects": 2126, "actual": 0.314, "predicted": 0.307, "labelled": 0.49, "roc_auc": 0.701},
+    {"name": "Dance", "projects": 797, "actual": 0.632, "predicted": 0.624, "labelled": 0.921, "roc_auc": 0.709},
+    {"name": "Fashion", "projects": 4496, "actual": 0.261, "predicted": 0.247, "labelled": 0.325, "roc_auc": 0.71},
+    {"name": "Film & Video", "projects": 12555, "actual": 0.38, "predicted": 0.379, "labelled": 0.68, "roc_auc": 0.712},
+    {"name": "Publishing", "projects": 7907, "actual": 0.317, "predicted": 0.317, "labelled": 0.504, "roc_auc": 0.716},
+    {"name": "Food", "projects": 4844, "actual": 0.244, "predicted": 0.249, "labelled": 0.369, "roc_auc": 0.718},
+    {"name": "Music", "projects": 9841, "actual": 0.49, "predicted": 0.491, "labelled": 0.814, "roc_auc": 0.728},
+    {"name": "Crafts", "projects": 1737, "actual": 0.257, "predicted": 0.245, "labelled": 0.315, "roc_auc": 0.733},
+    {"name": "Games", "projects": 6989, "actual": 0.354, "predicted": 0.36, "labelled": 0.521, "roc_auc": 0.789},
+    {"name": "Technology", "projects": 6386, "actual": 0.191, "predicted": 0.2, "labelled": 0.267, "roc_auc": 0.804}
+  ],
+  "by_goal_test": [
+    {"name": "up to 1k", "projects": 12202, "actual": 0.497, "predicted": 0.494, "labelled": 0.838, "roc_auc": 0.703},
+    {"name": "1k-2.5k", "projects": 8587, "actual": 0.465, "predicted": 0.46, "labelled": 0.766, "roc_auc": 0.708},
+    {"name": "2.5k-5k", "projects": 11191, "actual": 0.431, "predicted": 0.433, "labelled": 0.729, "roc_auc": 0.723},
+    {"name": "5k-10k", "projects": 13736, "actual": 0.366, "predicted": 0.365, "labelled": 0.608, "roc_auc": 0.72},
+    {"name": "10k-25k", "projects": 15034, "actual": 0.303, "predicted": 0.306, "labelled": 0.495, "roc_auc": 0.717},
+    {"name": "25k-50k", "projects": 6567, "actual": 0.227, "predicted": 0.23, "labelled": 0.305, "roc_auc": 0.717},
+    {"name": "50k-100k", "projects": 3925, "actual": 0.149, "predicted": 0.159, "labelled": 0.136, "roc_auc": 0.789},
+    {"name": "over 100k", "projects": 3217, "actual": 0.079, "predicted": 0.079, "labelled": 0.024, "roc_auc": 0.824}
+  ],
+  "time_split": {
+    "train_rows": 266011,
+    "test_rows": 106282,
+    "roc_auc": 0.757,
+    "mean_predicted": 0.33,
+    "actual_rate": 0.35,
+    "accuracy": 0.667,
+    "precision": 0.518,
+    "recall": 0.749,
+    "f1": 0.612
+  },
+  "importance": [
+    {"feature": "category", "mean": 0.1078, "std": 0.0016},
+    {"feature": "log_goal", "mean": 0.0906, "std": 0.003},
+    {"feature": "duration_days", "mean": 0.034, "std": 0.0007},
+    {"feature": "name_words", "mean": 0.0079, "std": 0.0012},
+    {"feature": "country", "mean": 0.0075, "std": 0.0007},
+    {"feature": "launch_weekday", "mean": 0.0026, "std": 0.0003},
+    {"feature": "name_length", "mean": 0.0022, "std": 0.0004},
+    {"feature": "launch_month", "mean": 0.0014, "std": 0.0004}
+  ],
+  "example": {
+    "category": "Tabletop Games",
+    "country": "US",
+    "goal_usd": 10000,
+    "duration_days": 30,
+    "probability": 0.511,
+    "band": "above average",
+    "similar_projects": 1375,
+    "similar_rate": 0.433,
+    "what_if": [
+      {"label": "29 days", "probability": 0.717},
+      {"label": "31 days", "probability": 0.621},
+      {"label": "Sunday launch", "probability": 0.383}
+    ]
+  }
+}

@@ -56,9 +56,9 @@ The project runs over four days. Track your progress on a GitHub Kanban board. T
 
 | Milestone | What it is | Target |
 | --- | --- | --- |
-| Milestone 0 | Data Ingestion & EDA | Day 1, 12:00 |
-| Milestone 1 | First model, the baseline | Day 2, 12:00 |
-| Milestone 2 | Slides draft | Day 3, 12:00 |
+| Milestone 0 | Data Ingestion  | Day 1, 12:00 |
+| Milestone 1 | EDA  | Day 2, 12:00 |
+| Milestone 2 | First model, the baseline | Day 3, 12:00 |
 | Milestone 3 | A model with error analysis | Day 4, 12:00 |
 | Milestone 4 | Final deliverables and presentation | Day 5, 14:00 |
 
